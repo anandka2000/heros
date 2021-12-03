@@ -9,4 +9,10 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: npm run test --passWithNoTests
+      - name: tests
+        uses: ./
+        with:
+          # wait for the URL to respond
+          # using the default parameter
+          start: npm start
+          wait-on: 'http://localhost:3050'
