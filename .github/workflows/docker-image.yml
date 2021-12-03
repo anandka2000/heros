@@ -12,6 +12,6 @@ jobs:
     steps: 
       - uses: actions/checkout@v2
         name: Build the Docker image
-      - run: docker build . --file Dockerfile --tag docker.io/tech5/heros-app:$(date +%s)
+      - run: docker build . --file Dockerfile --tag docker.io/tech5/heros-app
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - run: docker image push docker.io/tech5/heros-app:$(date +%s)
+      - run: docker image push docker.io/tech5/heros-app
