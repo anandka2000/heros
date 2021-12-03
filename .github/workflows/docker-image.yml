@@ -5,13 +5,23 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 jobs:
   dockerpush:
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v2
-        name: Build the Docker image
-      - run: docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_USERNAME }}/ldockeranand/heros-app
-      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-      - run: docker image push docker.io/${{ secrets.DOCKER_USERNAME }}/ldockeranand/heros-app
+      - uses: mr-smithers-excellent/docker-build-push@v5
+          with:
+            image: ldockeranand/heros-app
+            registry: docker.io
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+
+#jobs:
+#  dockerpush:
+#    runs-on: ubuntu-latest
+#    steps: 
+#      - uses: actions/checkout@v2
+#        name: Build the Docker image
+#      - run: docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_USERNAME }}/ldockeranand/heros-app
+#      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
+#      - run: docker image push docker.io/${{ secrets.DOCKER_USERNAME }}/ldockeranand/heros-app
