@@ -9,12 +9,15 @@ jobs:
   dockerpush:
     runs-on: ubuntu-latest
     steps: 
+      - uses: actions/checkout@v2
+        name: Build the Docker image
       - uses: mr-smithers-excellent/docker-build-push@v5
-          with:
-            image: ldockeranand/heros-app
-            registry: docker.io
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
+        name: use action for docker push
+        with:
+          image: ldockeranand/heros-app
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
 #jobs:
 #  dockerpush:
